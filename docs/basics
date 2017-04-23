@@ -1,0 +1,20 @@
+Fooling Around
+
+Should it be "kgb" or "platform" ??
+Python or bash?
+  windows has bash...
+
+COMMAND LINES
+>kgb 
+[[HELP]]
+
+> kgb hwid       (can be symlinked to 'hwid')
+APL.12345
+
+> kgb whatami    (can be symlinked to 'whatami')
+darwin-10.11-x86_64
+
+
+THINGS IT SHOULD DO
+whatami - take over from the old whatami program (rename it platform?)
+hwid - do what we have to do to figure out the manufacturer and serial number

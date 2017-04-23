@@ -1,0 +1,57 @@
+#! /usr/bin/env python
+
+from future import division
+from future import absolute_import
+from future import print_function
+from future import unicode_literals
+
+import argparse
+from pprint import pprint
+import sys
+
+def configure_obj_parser(parser):
+    obj_commands = parser.add_subparsers(title="obj commands")
+    create_obj = obj_commands.add_parser("create")
+    create_obj.add_argument("names", nargs="+")
+    create_obj.set_defaults(cmd="create_obj")
+
+    update = obj_commands.add_parser("update")
+    update.set_defaults(cmd="update")
+
+    update_parser = obj_commands.add_parser("update")
+    update_parser.add_argument("name")
+    update_parser.add_argument("--speed", metavar="<kn>", type=float)
+    update_parser.set_defaults(cmd="update_obj")
+
+
+def configure_class_parser(parser):
+    class_commands = parser.add_subparsers(title="class commands")
+    for action in ["create", "list", "update"]:
+        parser = class_commands.add_parser(action)
+        parser.set_defaults(cmd="%s_class" % action)
+        for class_type in ["moored", "drifting"]:
+            parser.add_argument("--%s" % class_type,
+                                action="store_const", const=class_type,
+                                dest="class_type")
+
+
+def parse_args(argv):
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(title="sub-commands")
+
+    # obj
+    obj_parser = subparsers.add_parser("obj")
+    configure_obj_parser(obj_parser)
+
+    # class
+    class_parser = subparsers.add_parser("class")
+    configure_class_parser(class_parser)
+
+    args = parser.parse_args(argv)
+    return args
+
+
+if __name__ == "__main__":
+    args = parse_args(sys.argv[1:])
+    pprint(args)
+    sys.exit(0)

@@ -1,0 +1,47 @@
+#! /bin/bash
+
+# Where is our server to test?
+SOTD_SERVER=http://127.0.0.1
+SOTD_PORT=5000
+SOTD=$SOTD_SERVER:$SOTD_PORT
+
+# How many -v's to give to curl
+VERBOSITY="-v"
+
+# Fix up strange output issues
+TEST() {
+    echo ; echo $1 ; shift
+}
+
+# Base url, should give us a basic summary of sotd itself
+#    -H "Content-Type: application/json" \
+TEST "summary"
+curl $VERBOSITY -X GET \
+     $SOTD/
+
+# Get a list of all available types (tables, collections)
+# TODO: later, list of objs/docs in each type
+TEST "get all types"
+curl $VERBOSITY -X GET $SOTD/types
+
+TEST "create new type"
+curl $VERBOSITY -X POST \
+    -d '[ {"key1": "value1"},
+          {"key2": "value2"} ]' \
+    $SOTD/types
+
+
+# TEST "debug query inline"
+# curl $VERBOSITy -X GET \
+#      "$SOTD/query?q=memory&fq=inStock:true"
+
+# TEST "debug query json"
+# curl $VERBOSITY -X GET \
+#      $SOTD/query -d '
+# {
+#   "query" : "memory",
+#   "filter" : "inStock:true"
+# }'
+
+
+## END OF LINE ##
