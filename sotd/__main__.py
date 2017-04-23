@@ -10,12 +10,12 @@ from flask import Flask
 from flask import g
 from flask import current_app
 
-from prog.routes import add_routes
+from frontend.routes import add_routes
 from prog.config import get_config
-from prog.connections import (
+from frontend.decorators import (
+    add_before_first_request_calls,
     add_before_request_calls,
     add_after_request_calls,
-    add_before_first_request_calls,
     add_teardown_request_calls,
     )
 
@@ -26,9 +26,9 @@ def main():
 
     app = Flask(__name__)
     add_routes(app)
+    add_before_first_request_calls(app)
     add_before_request_calls(app)
     add_after_request_calls(app)
-    add_before_first_request_calls(app)
     add_teardown_request_calls(app)
     app.run(debug=True)
 

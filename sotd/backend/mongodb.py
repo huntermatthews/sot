@@ -38,11 +38,11 @@ class MongoDB(object):
         self._client_ = None
         self._db_ = None
 
-    def get_types(self):
-        types = self._db.collection_names()
-        return types
+    def list_collections(self):
+        collections = self._db.collection_names()
+        return collections
 
-    def create_type(self, new_type):
+    def create_collection(self, new_collection):
         pass
 
 

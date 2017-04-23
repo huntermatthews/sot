@@ -19,16 +19,16 @@ TEST "summary"
 curl $VERBOSITY -X GET \
      $SOTD/
 
-# Get a list of all available types (tables, collections)
-# TODO: later, list of objs/docs in each type
-TEST "get all types"
-curl $VERBOSITY -X GET $SOTD/types
+# Get a list of all available collections
+# TODO: later, list of objs/docs in each collection
+TEST "get all collections"
+curl $VERBOSITY -X GET $SOTD/collections
 
-TEST "create new type"
+TEST "create two new collections"
 curl $VERBOSITY -X POST \
     -d '[ {"key1": "value1"},
           {"key2": "value2"} ]' \
-    $SOTD/types
+    $SOTD/collections
 
 
 # TEST "debug query inline"

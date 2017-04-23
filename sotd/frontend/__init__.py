@@ -7,6 +7,6 @@ from __future__ import unicode_literals
 
 from .app import summary
 from .debug import debug_query
-from .types import (list_types, create_types)
+from .collections import (list_collections, create_collections)
 
 ## END OF LINE ##

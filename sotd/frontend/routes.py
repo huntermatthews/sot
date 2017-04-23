@@ -17,11 +17,11 @@ def add_routes(app):
     app.add_url_rule('/query', 'debug_query', frontend.debug_query,
                      methods=['GET'])
 
-    # TYPES API
-    app.add_url_rule('/types', 'list_types', frontend.list_types,
-                     methods=['GET'])
-    app.add_url_rule('/types', 'create_types', frontend.create_types,
-                     methods=['POST'])
+    # COLLECTIONS API
+    app.add_url_rule('/collections', 'list_collections',
+                     frontend.list_collections, methods=['GET'])
+    app.add_url_rule('/collections', 'create_collections',
+                     frontend.create_collections, methods=['POST'])
 
 
 ## END OF LINE ##

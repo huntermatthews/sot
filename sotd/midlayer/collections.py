@@ -5,11 +5,12 @@ from __future__ import absolute_import
 from __future__ import print_function
 from __future__ import unicode_literals
 
-def get_all_types(db):
-    return db.get_types()
 
-def create_type(db, new_type):
-    return db.create_type(new_type)
+def list_collections(db):
+    return db.list_collections()
+
+def create_collection(db, new_collection):
+    return db.create_collection(new_collection)
 
 
 ## END OF LINE ##
