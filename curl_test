@@ -26,8 +26,9 @@ curl $VERBOSITY -X GET $SOTD/collections
 
 TEST "create two new collections"
 curl $VERBOSITY -X POST \
-    -d '[ {"key1": "value1"},
-          {"key2": "value2"} ]' \
+     -H "Content-Type: application/json" \
+     -d '[ {"name": "books", "description": "my books"},
+          {"name": "magazines"} ]'\
     $SOTD/collections
 
 

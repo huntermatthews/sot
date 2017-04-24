@@ -18,9 +18,16 @@ def list_collections():
     return '{}'.format(collections.list_collections(g.db))
 
 def create_collections():
+    result = []
+    print(request.is_json)
+    print(request.data)
     new_collections = request.get_json()
+    print(type(new_collections))
     pprint(new_collections)
-    collections.create_collection(g.db, new_collections)
-    return jsonify(new_collections)
+    if isinstance(new_collections, dict):
+        new_collections = list(new_collections)
+    for coll in new_collections:
+        result.append(collections.create_collection(g.db, coll))
+    return jsonify(result)
 
 ## END OF LINE ##
