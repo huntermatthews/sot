@@ -23,5 +23,4 @@ def add_routes(app):
     app.add_url_rule('/collections', 'create_collections',
                      frontend.create_collections, methods=['POST'])
 
-
 ## END OF LINE ##

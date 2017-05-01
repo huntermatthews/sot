@@ -6,12 +6,15 @@ SOTD_PORT=5000
 SOTD=$SOTD_SERVER:$SOTD_PORT
 
 # How many -v's to give to curl
-VERBOSITY="-v"
+#VERBOSITY="-v"
 
 # Fix up strange output issues
 TEST() {
     echo ; echo $1 ; shift
 }
+
+# Get a fresh database first off.
+mongo sot_test --eval "db.dropDatabase()"
 
 # Base url, should give us a basic summary of sotd itself
 #    -H "Content-Type: application/json" \
@@ -25,10 +28,11 @@ TEST "get all collections"
 curl $VERBOSITY -X GET $SOTD/collections
 
 TEST "create two new collections"
+#         {"name": "magazines"} ]'\
+
 curl $VERBOSITY -X POST \
      -H "Content-Type: application/json" \
-     -d '[ {"name": "books", "description": "my books"},
-          {"name": "magazines"} ]'\
+     -d '[ {"name": "books", "description": "my books"}]' \
     $SOTD/collections
 
 

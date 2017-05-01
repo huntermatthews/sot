@@ -38,12 +38,31 @@ class MongoDB(object):
         self._client_ = None
         self._db_ = None
 
+    def is_collection_name_valid(self, name):
+        # must conform to mongodb rules
+        if (('$' in name) or
+            (name == '') or
+            (name.startswith('system.'))):
+            return False
+        else:
+            return True
+
     def list_collections(self):
         collections = self._db.collection_names()
         return collections
 
-    def create_collection(self, new_collection):
-        pass
+    def create_collection(self, cname):
+        self._db.create_collection(cname)
+        coll = self._db[cname]
+        print('thing=', type(coll.uuid_subtype))
+        coll.uuid_subtype = 4
+        print('thing=', coll.uuid_subtype)
 
+
+    def update_collection(self, cname, item):
+        coll = self._db.get_collection(cname)
+        result = coll.insert_one(item)
+        print(result)
+        return result   # InsertOneResult
 
 ## END OF LINE ##
