@@ -35,6 +35,11 @@ curl $VERBOSITY -X POST \
      -d '[ {"name": "books", "description": "my books"}]' \
     $SOTD/collections
 
+TEST "get a field"
+#     -d '[ {"name": "books", "description": "my books"}]' \
+curl $VERBOSITY -X GET \
+     -H "Content-Type: application/json" \
+    $SOTD/collections/books/items/hero/fields/name
 
 # TEST "debug query inline"
 # curl $VERBOSITy -X GET \

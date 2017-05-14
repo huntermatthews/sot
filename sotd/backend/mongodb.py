@@ -65,4 +65,10 @@ class MongoDB(object):
         print(result)
         return result   # InsertOneResult
 
+    def get_field(self, collection, item, field):
+        print('backend.db:')
+        print('  collection = ', collection)
+        print('  item = ', item)
+        print('  field = ', field)
+        
 ## END OF LINE ##

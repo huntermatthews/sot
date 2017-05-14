@@ -23,4 +23,13 @@ def add_routes(app):
     app.add_url_rule('/collections', 'create_collections',
                      frontend.create_collections, methods=['POST'])
 
+    # ITEMS API
+    app.add_url_rule('/collections/<collection>/items', 'list_items',
+                     frontend.list_items, methods=['GET'])
+    app.add_url_rule('/collections/<collection>/items', 'create_items',
+                     frontend.create_items, methods=['POST'])
+
+    app.add_url_rule('/collections/<collection>/items/<item>/fields/<field>',
+                     'get_field', frontend.get_field, methods=['GET'])
+
 ## END OF LINE ##
